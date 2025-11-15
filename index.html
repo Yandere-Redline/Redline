@@ -1,45 +1,299 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>歪愛紅絲律 | Official Hub</title>
+  <title>歪愛紅絲律 | 白影ひなみ</title>
+
   <style>
-    body {
-      background-color: #0d0d0d;
-      color: #f8f8f8;
-      font-family: 'Noto Sans JP', sans-serif;
-      text-align: center;
-      padding-top: 100px;
-    }
-    h1 {
-      color: #ff003c;
-      font-size: 2rem;
-    }
-    a.button {
-      display: inline-block;
-      margin: 20px;
-      padding: 14px 24px;
-      border: 2px solid #ff003c;
-      border-radius: 10px;
-      color: #ff003c;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    a.button:hover {
-      background-color: #ff003c;
-      color: #fff;
-    }
+@font-face {
+  font-family: 'TypedeerMonoStamp';
+  src: url('TypedeerMono-Stamp.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 英語だけ TypedeerMonoStamp を適用 */
+:lang(en) {
+  font-family: 'TypedeerMonoStamp', 'Noto Serif JP', serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #f2f2f2;
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ★追加：全体を中央に寄せる箱 */
+.wrapper {
+  max-width: 1080px;      /* 元画像の横幅に合わせる */
+  margin: 0 auto;         /* 画面の中央に配置 */
+}
+
+/* --- ヘッダー --- */
+header {
+  width: 100%;
+  padding: 20px 0 10px;   /* 左右パディングは wrapper に任せる */
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: #ff003c;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+header a {
+  color: #8b0000;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+header a:hover {
+  opacity: 0.7;
+}
+
+/* --- メインレイアウト --- */
+.container {
+  display: flex;
+  padding: 40px 0 20px;   /* 左右の余白を削る → 中央に寄る */
+  gap: 30px;
+  align-items: flex-start; /* 上を揃える */
+}
+
+/* ★追加：縦書きキャッチ */
+.catch-copy {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: #f8f8f8;
+}
+
+.left {
+  width: 50%;
+  min-width: 260px;
+}
+
+.left img {
+  width: 100%;
+  height: auto;
+}
+
+.right {
+  width: 50%;
+  min-width: 300px;
+  padding-top: 20px;      /* ここでテキストの縦位置調整 */
+}
+
+/* 名前 */
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 4px;  /* ← ここを小さくすると行間が詰まる */
+}
+
+/* サブタイトル */
+.subtitle {
+  font-weight: bold;
+  color: #cc0000;
+  margin-bottom: 20px;
+  margin-top: 0px;    /* ← ここを0にするとピッタリくっつく */
+}
+
+/*　説明文 */
+.text {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+.highlight {
+  color: #cc0000;
+  font-weight: bold;
+}
+
+/* cv. の英語部分だけ小さく＋白字 */
+.cv-part {
+  font-family: 'TypedeerMonoStamp', serif; /* 英語フォント */
+  font-size: 1.2rem;   /* ← お好みで調整（0.8–1.0 推奨） */
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* 五月雪夜の日本語（必要なら小さく） */
+.cv-part-ja {
+  font-size: 1.1rem;   /* ← 日本語も同じサイズにしたい場合 */
+  color: #ffffff;
+}
+
+/* セクションタイトルを中央に */
+.section-title {
+  text-align: center;
+  font-size: 2.0rem;
+  color: #cc0000;   /* 赤字 */
+  margin: 40px 0 20px;
+  font-weight: bold;
+}
+
+
+.big-image-row {
+  margin: 20px 0;
+  display: flex;
+  gap: 12px;      /* 画像の間隔 */
+}
+
+.big-image-row img {
+  width: 33.33%;  /* 3枚を均等配置 */
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+/* --- サムネ一覧 --- */
+.thumbs {
+  margin-top: -10px;      /* 文字との隙間 */
+  display: flex;
+  justify-content: space-between; /* 横いっぱいに並べる */
+  gap: 12px;
+  padding: 10px 0 40px;
+}
+
+.thumbs img {
+  width: 33%;
+  border-radius: 6px;
+  border: 1px solid #333;
+  transition: 0.2s;
+}
+
+.thumbs img:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+/* --- R15一覧 --- */
+.r15-image {
+  margin-top: 20px;      /* サムネとの隙間 */
+  text-align: left;     /* 右に寄せる（PowerPointと同じ） */
+}
+
+.r15-image img {
+  width: 33%;            /* 好みで調整（40〜60%推奨） */
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #333;
+  transition: 0.2s;
+}
+
+.r15-image img:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+
+
+.footer {
+  text-align: center;
+  padding: 10px 0 20px;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+
+
+
   </style>
 </head>
+
+
+
 <body>
-  <h1>歪愛紅絲律 - Red Line</h1>
-  <p>魔物に生まれ、人を愛した――運命を超える紅い絲。</p>
 
-  <a href="https://example.com" class="button">🎮 ゲームをプレイ</a>
-  <a href="https://www.youtube.com/@Hinamis_Ws" class="button">📺 YouTube</a>
-  <a href="https://ci-en.net/creator/00000" class="button">💎 Ci-en</a>
+  <div class="wrapper">  <!-- ★追加 -->
 
-  <p style="margin-top:50px; font-size:0.8rem;">© 2025 Hinami Works</p>
+<header>
+  <a href="#"><span lang="en">Game</span></a>
+  <a href="#"><span lang="en">Story</span></a>
+  <a href="#"><span lang="en">Character</span></a>
+  <a href="#"><span lang="en">Youtube</span></a>
+</header>
+
+  <div class="container">
+
+  <div class="catch-copy">
+    あんたを守るためなら、全員消すー
+  </div>
+
+    <div class="left">
+      <img src="character001.png" alt="白影ひなみ">
+    </div>
+
+    <div class="right">
+
+     <div class="title">
+       白影ひなみ
+       <span class="cv-part-ja">(</span>
+       <span class="cv-part" lang="en">cv.</span>
+       <span class="cv-part-ja">五月雪夜</span>
+       <span class="cv-part-ja">)</span>
+       </div>
+
+      <div class="subtitle">-魔物狩りの剣士-</div>
+
+      <div class="text">
+        赤い刀<br>
+        黒いドレス<br>
+        白い髪<br>
+        魔物狩りを生業とする剣士<br>
+        心根は優しく無害な魔物には手を出さない<br><br>
+
+        その根底にあるのは、<span class="highlight">あなたへの狂信的な愛</span><br>
+        あなたを守るためなら人も魔物も容赦なく切り捨てる<br><br>
+
+        <span class="highlight">私から逃げられると思った？</span><br>
+        ひなみからは誰も逃げられないー
+      </div>
+
+<div class="big-image-row">
+  <img src="BigImage001.png" alt="">
+  <img src="BigImage002.png" alt="">
+  <img src="BigImage003.png" alt="">
+</div>
+
+    </div>
+  </div>
+
+<!-- ★ Youtube セクション -->
+<div class="youtube-section">
+  <h2 class="section-title"lang="en">Youtube</h2>
+
+  <div class="thumbs">
+    <img src="Thumbnail001.png">
+    <img src="Thumbnail002.png">
+    <img src="Thumbnail003.png">
+  </div>
+</div>
+
+
+<!-- ★R15画像ブロック -->
+<div class="r15-image">
+
+  <h2 class="section-title" lang="en">R15</h2>
+  
+<img src="R15.png" alt="R15 warning">
+</div>
+
+  <div class="footer">© 2025 Hinami Works</div>
+
+  </div> <!-- wrapper 終わり -->
+
 </body>
 </html>
