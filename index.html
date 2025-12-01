@@ -82,10 +82,10 @@ header a:hover {
 /* 画像本体 */
 .top-visual {
   width: 100%;
-  max-width: 1280px;
-  height: auto;
-  display: block;
-  box-shadow: 0 0 40px rgba(255, 0, 60, 0.25);
+  height: 520px; /* PCの高さは自由に変更可能 */
+  background-image: url('image/TopVisual.png'); /* ← 今使っている横長の画像 */
+  background-size: cover;
+  background-position: center;
 }
 
 /* 縦書きテロップ */
@@ -505,27 +505,30 @@ html {
   }
 
   header {
-    padding: 10px 0 4px;
-    gap: 18px;
+    padding: 10px 0 10px;
+    gap: 10px;
     font-size: 0.9rem;
   }
 
   /* メインビジュアル：上下の余白を少し詰める */
   .top-visual-wrap {
-    padding-top: 40px;
-    padding-bottom: 10px;
+    padding-top: 35px;
+    padding-bottom: 0px;
   }
 
   .top-visual {
-    max-width: 100%;
-    box-shadow: 0 0 24px rgba(255, 0, 60, 0.25);
+    width: 100%;
+    height: 165vw; /* ←画像比率に近づけて最適化 */
+    background-image: url('image/TopVisualPhone.png');
+    background-size: cover;
+    background-position: top center; /* ←上から見せる */
   }
 
   /* 縦書きテロップを少し小さく＆内側へ */
   .vertical-caption {
-    font-size: 0.9rem;
+    font-size: 1.4rem;
     right: 5%;
-    top: 50%;
+    top: 38%;
   }
 
   /* Story 部分：横幅を広めにして文字も少し小さく */
@@ -630,27 +633,96 @@ html {
     max-width: 360px;
   }
 
-  /* R15ミニ誘導の横幅を広く */
+  /* --- R15導線（年齢確認） --- */
+.r15-gate {
+  margin-top: 10px;
+  text-align: center;
+  padding: 0px 0 60px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+.r15-lead {
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.r15-lead span {
+  color: #cc0000;
+  font-weight: 700;
+}
+
+.r15-question {
+  color: #ffffff;
+  margin: 16px 0 24px;
+}
+
+.r15-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.r15-button {
+  display: inline-block;
+  padding: 10px 32px;
+  border-radius: 999px;
+  border: 1px solid #cc0000;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: 0.2s;
+}
+
+.r15-button:hover {
+  background: #cc0000;
+  color: #000;
+}
+
+
+ /* --- R15 ミニ導線の外枠 --- */
   .r15-mini-gate {
-    width: 92%;
-    margin-top: -20px;
-    margin-bottom: 40px;
+    width: 88%;
+    margin: 40px auto;
+    padding: 22px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 50, 80, 0.4); /* 赤ラインを少し強調 */
+    text-align: center;
+    box-sizing: border-box;
   }
 
+  /* --- 説明文 --- */
   .r15-mini-text {
-    font-size: 1.0rem;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    padding: 0 6px;
   }
 
-  /* R15ゲートのボタンを縦並びに */
-  .r15-buttons {
-    flex-direction: column;
-    gap: 10px;
+  /* --- 「R15入口へ」ボタン --- */
+  .r15-mini-btn {
+    display: block;
+    width: 75%;
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 13px 0;
+    font-size: 1.1rem;
+    border-radius: 28px;
+    border: 1.5px solid #ff1e50;
   }
 
-  .r15-button {
-    width: 70%;
-    max-width: 260px;
+  /* --- 上下の余白強化（次のキャラ一覧と干渉しない）--- */
+  #r15-gate-top {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
+
+
+
 }
 
 
@@ -676,12 +748,13 @@ html {
 
 <section class="top-visual-wrap">
   <!-- メインビジュアル -->
-  <img src="image/TopVisual.png" alt="メインビジュアル" class="top-visual">
+  <div class="top-visual"></div>
 
   <!-- 縦書きテロップ -->
   <div class="vertical-caption">
     魔物に生まれて、人を愛した—
   </div>
+
 </section>
 
 
