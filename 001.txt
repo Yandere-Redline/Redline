@@ -4,7 +4,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>歪愛紅絲律 | 白影ひなみ</title>
+  <title>歪愛紅絲律 | ヤンデレ × 人外魔物 × ASMR | 白影ひなみ公式サイト</title>
+  <meta name="description" content="歪愛紅絲律－ヤンデレレッドライン－公式サイト。ヤンデレ×魔物のASMR・シチュエーションボイスを公開中。魔物ヒロインとの奇妙な同棲・告白・依存・支配を描いたダークな恋愛ストーリーをお届けします。">
 
   <style>
 @font-face {
@@ -18,6 +19,12 @@
 :lang(en) {
   font-family: 'TypedeerMonoStamp', 'Noto Serif JP', serif;
 }
+
+.site-title {
+  position: absolute;
+  left: -9999px;  /* 画面外に退避：スクリーンリーダーには読まれる */
+}
+
 
 body {
   margin: 0;
@@ -82,17 +89,17 @@ header a:hover {
 /* 画像本体 */
 .top-visual {
   width: 100%;
-  max-width: 1280px;
-  height: auto;
-  display: block;
-  box-shadow: 0 0 40px rgba(255, 0, 60, 0.25);
+  height: 800px; /* PCの高さは自由に変更可能 */
+  background-image: url('image/TopVisual.webp'); /* ← 今使っている横長の画像 */
+  background-size: cover;
+  background-position: center;
 }
 
 /* 縦書きテロップ */
 .vertical-caption {
   position: absolute;
-  right: 0.7%;
-  top: 43%;
+  right: 0.2%;
+  top: 38%;
   transform: translateY(-50%);
   font-family: 'Noto Serif JP', serif;
   font-size: 1.8rem;
@@ -505,27 +512,30 @@ html {
   }
 
   header {
-    padding: 10px 0 4px;
-    gap: 18px;
+    padding: 10px 0 10px;
+    gap: 10px;
     font-size: 0.9rem;
   }
 
   /* メインビジュアル：上下の余白を少し詰める */
   .top-visual-wrap {
-    padding-top: 40px;
-    padding-bottom: 10px;
+    padding-top: 35px;
+    padding-bottom: 0px;
   }
 
   .top-visual {
-    max-width: 100%;
-    box-shadow: 0 0 24px rgba(255, 0, 60, 0.25);
+    width: 100%;
+    height: 165vw; /* ←画像比率に近づけて最適化 */
+    background-image: url('image/TopVisualPhone.webp');
+    background-size: cover;
+    background-position: top center; /* ←上から見せる */
   }
 
   /* 縦書きテロップを少し小さく＆内側へ */
   .vertical-caption {
-    font-size: 0.9rem;
+    font-size: 1.4rem;
     right: 5%;
-    top: 50%;
+    top: 38%;
   }
 
   /* Story 部分：横幅を広めにして文字も少し小さく */
@@ -630,27 +640,96 @@ html {
     max-width: 360px;
   }
 
-  /* R15ミニ誘導の横幅を広く */
+  /* --- R15導線（年齢確認） --- */
+.r15-gate {
+  margin-top: 10px;
+  text-align: center;
+  padding: 0px 0 60px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+.r15-lead {
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.r15-lead span {
+  color: #cc0000;
+  font-weight: 700;
+}
+
+.r15-question {
+  color: #ffffff;
+  margin: 16px 0 24px;
+}
+
+.r15-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.r15-button {
+  display: inline-block;
+  padding: 10px 32px;
+  border-radius: 999px;
+  border: 1px solid #cc0000;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition: 0.2s;
+}
+
+.r15-button:hover {
+  background: #cc0000;
+  color: #000;
+}
+
+
+ /* --- R15 ミニ導線の外枠 --- */
   .r15-mini-gate {
-    width: 92%;
-    margin-top: -20px;
-    margin-bottom: 40px;
+    width: 88%;
+    margin: 40px auto;
+    padding: 22px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 50, 80, 0.4); /* 赤ラインを少し強調 */
+    text-align: center;
+    box-sizing: border-box;
   }
 
+  /* --- 説明文 --- */
   .r15-mini-text {
-    font-size: 1.0rem;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    padding: 0 6px;
   }
 
-  /* R15ゲートのボタンを縦並びに */
-  .r15-buttons {
-    flex-direction: column;
-    gap: 10px;
+  /* --- 「R15入口へ」ボタン --- */
+  .r15-mini-btn {
+    display: block;
+    width: 75%;
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 13px 0;
+    font-size: 1.1rem;
+    border-radius: 28px;
+    border: 1.5px solid #ff1e50;
   }
 
-  .r15-button {
-    width: 70%;
-    max-width: 260px;
+  /* --- 上下の余白強化（次のキャラ一覧と干渉しない）--- */
+  #r15-gate-top {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
+
+
+
 }
 
 
@@ -659,7 +738,12 @@ html {
 
 
 <body>
-  <div class="wrapper">  <!-- ★追加 -->
+  <div class="wrapper">  
+    
+    <!-- ★ここにサイト全体の h1 を追加 -->
+    <h1 id="top" class="site-title">
+      歪愛紅絲律 | ヤンデレ × 人外魔物 × ASMR 公式サイト
+    </h1>
 
 <header>
   <a href="#top"><span lang="en">Top</span></a>
@@ -676,12 +760,13 @@ html {
 
 <section class="top-visual-wrap">
   <!-- メインビジュアル -->
-  <img src="image/TopVisual.png" alt="メインビジュアル" class="top-visual">
+  <div class="top-visual"></div>
 
   <!-- 縦書きテロップ -->
   <div class="vertical-caption">
     魔物に生まれて、人を愛した—
   </div>
+
 </section>
 
 
@@ -692,9 +777,9 @@ html {
  <h2 class="section-title" lang="en">Story</h2>
 
     <!-- キャッチコピー -->
-    <h2 class="story-catch">
+    <h3 class="story-catch">
       ――魔物に生まれ、人を愛した――
-    </h2>
+    </h3>
 
     <!-- 本文（LPっぽく中央寄せの文章） -->
     <p class="story-text">
@@ -787,37 +872,37 @@ html {
   </div>
 
     <div class="left">
-    <img class="char1 fade-character" src="image/character001.png">
+    <img class="char1 fade-character" src="image/character001.webp">
     </div>
 
     <div class="right">
 
-     <div class="title" id="char-hinami">
+     <h3 class="title" id="char-hinami">
        白影ひなみ
        <span class="cv-part-ja">(</span>
        <span class="cv-part" lang="en">cv.</span>
        <span class="cv-part-ja">五月雪夜</span>
        <span class="cv-part-ja">)</span>
-       </div>
+     </h3>
 
       <div class="subtitle">-魔物狩りの剣士-</div>
 
       <div class="text">
-        <h3 class="heading">概要 ―Profile―</h3><br>
+        <h4 class="heading">概要 ―Profile―</h4><br>
         赤い刀を携えた魔物狩りの女剣士。<br>
         その実力から魔物にも人間にも恐れられ、<br>
         自らも周囲との関係を断ち切っている。<br>
         唯一、<span class="highlight">あなたにだけは心を開いている。</span><br>
         <br>
 
-        <h3 class="heading">性格 ―Personality―</h3><br>
+        <h4 class="heading">性格 ―Personality―</h4><br>
         クールであまり感情を見せない。<br>
         しかし、無害な魔物は見逃す優しい面もある。<br>
         彼女と居れば、<br>
         あなたを守り、支え、励ましてくれるだろう。<br>
         <br>
         
-        <h3 class="heading">歪愛 ―Yandere―</h3><br>
+        <h4 class="heading">歪愛 ―Yandere―</h4><br>
         彼女の根底には、あなたを守るという<span class="highlight">狂信的な愛</span>がある。<br>
         あなたのためなら人も魔物も容赦なく斬り捨てる。<br>
         彼女に一生涯の愛を注ぎ続けなければならない。<br>
@@ -826,9 +911,9 @@ html {
       </div>
 
 <div class="big-image-row">
-  <img src="image/BigImage001.png" class="expansion">
-  <img src="image/BigImage002.png" class="expansion">
-  <img src="image/BigImage003.png" class="expansion">
+  <img src="image/BigImage001.webp" class="expansion">
+  <img src="image/BigImage002.webp" class="expansion">
+  <img src="image/BigImage003.webp" class="expansion">
 </div>
 
     </div>
@@ -842,15 +927,15 @@ html {
 
     <!-- ★サムネ1 -->
     <a href="https://youtu.be/OjYg1TqCKl0" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail001.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail001.webp" class="yt-thumb" alt="白影ひなみ ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
     <a href="https://youtu.be/w3taG2OPQGU" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail002.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail002.webp" class="yt-thumb" alt="白影ひなみ ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
     <a href="https://youtu.be/_jWIYoeEy0M" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail003.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail003.webp" class="yt-thumb" alt="白影ひなみ ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
   </div>
@@ -884,37 +969,37 @@ html {
   </div>
 
     <div class="left">
-    <img class="char2 fade-character" src="image/character011.png">
+    <img class="char2 fade-character" src="image/character011.webp">
     </div>
 
     <div class="right">
 
-     <div class="title" id="char-verneze">
+     <h3 class="title" id="char-verneze">
        ヴェルネーゼ
        <span class="cv-part-ja">(</span>
        <span class="cv-part" lang="en">cv.</span>
        <span class="cv-part-ja">琴川ゆら</span>
        <span class="cv-part-ja">)</span>
-       </div>
+       </h3>
 
       <div class="subtitle">-蜘蛛の魔物-</div>
 
       <div class="text">
-        <h3 class="heading">概要 ―Profile―</h3><br>
+        <h4 class="heading">概要 ―Profile―</h4><br>
         最近付き合い始めた、あなたの彼女。<br>
         目を離すとすぐにナンパやスカウトされるほどの美少女。<br>
         他の男からの誘いを全て断ってあなただけに夢中。<br>
         なにか秘密がありそう…？<br>
         <br>
 
-        <h3 class="heading">性格 ―Personality―</h3><br>
+        <h4 class="heading">性格 ―Personality―</h4><br>
         典型的な犬系彼女。<br>
         素直で明るく、甘えん坊でスキンシップ大好き。<br>
         あなたと居ることが何よりの喜びに感じている。<br>
         四六時中イチャイチャしていられる、甘い恋ができるだろう。<br>
         <br>
         
-        <h3 class="heading">歪愛 ―Yandere―</h3><br>
+        <h4 class="heading">歪愛 ―Yandere―</h4><br>
         <span class="highlight">純粋な執着と依存、</span>それが愛の正体<br>
         愛が臨界点に達したとき<span class="highlight">蜘蛛ノ能力</span>が発現する<br>
         糸で拘束され、部屋に監禁され、毒の口づけで酔わされる<br>
@@ -922,9 +1007,9 @@ html {
       </div>
 
 <div class="big-image-row">
-  <img src="image/BigImage011.png" class="expansion">
-  <img src="image/BigImage012.png" class="expansion">
-  <img src="image/BigImage013.png" class="expansion">
+  <img src="image/BigImage011.webp" class="expansion">
+  <img src="image/BigImage012.webp" class="expansion">
+  <img src="image/BigImage013.webp" class="expansion">
 </div>
 
     </div>
@@ -938,15 +1023,15 @@ html {
 
     <!-- ★サムネ1 -->
     <a href="https://youtu.be/ObeFolHhpeg" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail011.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail011.webp" class="yt-thumb" alt="ヴェルネーゼ ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
     <a href="https://youtu.be/ObeFolHhpeg" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail012.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail012.webp" class="yt-thumb" alt="ヴェルネーゼ ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
     <a href="https://youtu.be/ITgfAHd_bao" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail013.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail013.webp" class="yt-thumb" alt="ヴェルネーゼ ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
   </div>
@@ -980,37 +1065,37 @@ html {
   </div>
 
     <div class="left">
-    <img class="char3 fade-character" src="image/character011.png">
+    <img class="char3 fade-character" src="image/character011.webp">
     </div>
 
     <div class="right">
 
-     <div class="title" id="char-noctia">
+     <h3 class="title" id="char-noctia">
        ノクティア
        <span class="cv-part-ja">(</span>
        <span class="cv-part" lang="en">cv.</span>
        <span class="cv-part-ja">琴川ゆら</span>
        <span class="cv-part-ja">)</span>
-       </div>
+       </h3>
 
       <div class="subtitle">-夢を操る魔物-</div>
 
       <div class="text">
-        <h3 class="heading">概要 ―Profile―</h3><br>
+        <h4 class="heading">概要 ―Profile―</h4><br>
         あなたの夢に現れた少女。<br>
         見たい夢、叶えられなかった夢を実現する能力を持つ。<br>
         1日だけ極上の癒しをあなたにくれる、<br>
         天使のような存在。<br>
         <br>
 
-        <h3 class="heading">性格 ―Personality―</h3><br>
+        <h4 class="heading">性格 ―Personality―</h4><br>
         清楚を体現したような性格。<br>
         常に柔らかい微笑みを浮かべ、あなたの話をしっかりと聞いてくれる。<br>
         彼女と一緒に居ると、<br>
         心が安らぐような居心地の良さを感じさせてくれる。<br>
         <br>
         
-        <h3 class="heading">歪愛 ―Yandere―</h3><br>
+        <h4 class="heading">歪愛 ―Yandere―</h4><br>
         <span class="highlight">「夢という牢獄」</span>に縛ること、それが彼女の愛し方―<br>
         彼女を選べば、告白、同棲、初夜…<br>
         あらゆる愛の形を永遠になぞり続けることになる。<br>
@@ -1018,9 +1103,9 @@ html {
       </div>
 
 <div class="big-image-row">
-  <img src="image/BigImage021.png" class="expansion">
-  <img src="image/BigImage022.png" class="expansion">
-  <img src="image/BigImage023.png" class="expansion">
+  <img src="image/BigImage021.webp" class="expansion">
+  <img src="image/BigImage022.webp" class="expansion">
+  <img src="image/BigImage023.webp" class="expansion">
 </div>
 
     </div>
@@ -1034,11 +1119,11 @@ html {
 
     <!-- ★サムネ1 -->
     <a href="https://youtu.be/NoTJq-uE9rY" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail021.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail021.webp" class="yt-thumb" alt="ノクティア ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
     <a href="https://youtu.be/uBuyyKbW1-Y" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail022.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail022.webp" class="yt-thumb" alt="ノクティア ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
   </div>
 
@@ -1072,37 +1157,37 @@ html {
   </div>
 
     <div class="left">
-    <img class="char4 fade-character" src="image/character031.png">
+    <img class="char4 fade-character" src="image/character031.webp">
     </div>
 
     <div class="right">
 
-     <div class="title" id="char-reina">
+     <h3 class="title" id="char-reina">
        麗奈
        <span class="cv-part-ja">(</span>
        <span class="cv-part" lang="en">cv.</span>
        <span class="cv-part-ja">琴川ゆら</span>
        <span class="cv-part-ja">)</span>
-       </div>
+       </h3>
 
       <div class="subtitle">-盲目の魔物-</div>
 
       <div class="text">
-        <h3 class="heading">概要 ―Profile―</h3><br>
+        <h4 class="heading">概要 ―Profile―</h4><br>
         滔々と雪が降りつもる、雪原の奥深くで出会った盲目の女性。<br>
         遭難したあなたを、自身が営む旅館に案内してくれる。<br>
         青色の着物を纏い静かに佇む姿は、<br>
         妖艶な魅力を感じさせる。<br>
         <br>
 
-        <h3 class="heading">性格 ―Personality―</h3><br>
+        <h4 class="heading">性格 ―Personality―</h4><br>
         優しく包み込むような<span class="highlight">母性のかたまり。</span><br>
         透き通るような声で優しく語り、<br>
         声色、心音、呼吸であなたを全て理解してくれる。<br>
         ずっと前からあなたを育ててきた母親のように。<br>
         <br>
         
-        <h3 class="heading">歪愛 ―Yandere―</h3><br>
+        <h4 class="heading">歪愛 ―Yandere―</h4><br>
         彼女が注ぐ愛は、母性という名の<span class="highlight">従属と支配。</span><br>
         一人では何もできない、赤ん坊のあなたを母として愛してくれる。<br>
         ただ委ねれば良い。<br>
@@ -1110,9 +1195,9 @@ html {
       </div>
 
 <div class="big-image-row">
-  <img src="image/BigImage031.png" class="expansion">
-  <img src="image/BigImage032.png" class="expansion">
-  <img src="image/BigImage033.png" class="expansion">
+  <img src="image/BigImage031.webp" class="expansion">
+  <img src="image/BigImage032.webp" class="expansion">
+  <img src="image/BigImage033.webp" class="expansion">
 </div>
 
     </div>
@@ -1126,7 +1211,7 @@ html {
 
     <!-- ★サムネ1 -->
     <a href="https://youtu.be/TS4kMmGjKHw" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail031.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail031.webp" class="yt-thumb" alt="麗奈 ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
   </div>
@@ -1161,37 +1246,37 @@ html {
   </div>
 
     <div class="left">
-    <img class="char5 fade-character" src="image/character031.png">
+    <img class="char5 fade-character" src="image/character031.webp">
     </div>
 
     <div class="right">
 
-     <div class="title" id="char-eferia">
+     <h3 class="title" id="char-eferia">
        エフェリア
        <span class="cv-part-ja">(</span>
        <span class="cv-part" lang="en">cv.</span>
        <span class="cv-part-ja">五月雪夜</span>
        <span class="cv-part-ja">)</span>
-       </div>
+       </h3>
 
       <div class="subtitle">-堕天使メイド-</div>
 
       <div class="text">
-        <h3 class="heading">概要 ―Profile―</h3><br>
+        <h4 class="heading">概要 ―Profile―</h4><br>
         あなたの屋敷に仕えるメイド。<br>
         スペックは低くドジばかりで周囲には呆れられている。<br>
         しかし、常に笑顔を絶やさない愛されキャラ。<br>
         他のメイドとは違いあなたが唯一気兼ねなく話せる存在。<br>
         <br>
 
-        <h3 class="heading">性格 ―Personality―</h3><br>
+        <h4 class="heading">性格 ―Personality―</h4><br>
         天真爛漫、純粋無垢。<br>
         思ったことを何でも口に出してしまう、裏表の無い性格。<br>
         あなたへの好意を言葉にして伝えてくれる、<br>
         初心な交際ができるだろう。<br>
         <br>
         
-        <h3 class="heading">歪愛 ―Yandere―</h3><br>
+        <h4 class="heading">歪愛 ―Yandere―</h4><br>
         <span class="highlight">果てない献身、</span>それが彼女の愛<br>
         あなたの要望に応えることが彼女の喜び<br>
         例えそれが<span class="highlight">調教</span>と呼ばれるものでも…<br>
@@ -1199,9 +1284,9 @@ html {
       </div>
 
 <div class="big-image-row">
-  <img src="image/BigImage041.png" class="expansion">
-  <img src="image/BigImage042.png" class="expansion">
-  <img src="image/BigImage043.png" class="expansion">
+  <img src="image/BigImage041.webp" class="expansion">
+  <img src="image/BigImage042.webp" class="expansion">
+  <img src="image/BigImage043.webp" class="expansion">
 </div>
 
     </div>
@@ -1215,11 +1300,11 @@ html {
 
     <!-- ★サムネ1 -->
     <a href="https://youtu.be/_XEjte7Rwiw" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail041.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail041.webp" class="yt-thumb" alt="エフェリア ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
     <a href="https://youtu.be/liSUnuu4Q5k" target="_blank" class="yt-thumb-link">
-      <img src="image/Thumbnail042.png" class="yt-thumb" alt="">
+      <img src="image/Thumbnail042.webp" class="yt-thumb" alt="エフェリア ヤンデレASMR シチュエーションボイス サムネイル">
     </a>
 
   </div>
@@ -1297,32 +1382,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ▼ キャラ1：001 ↔ 002 ↔ 001…
   setupCharacterFade(".char1", [
-    "image/character001.png",
-    "image/character002.png"
+    "image/character001.webp",
+    "image/character002.webp"
   ], 7000);
 
   // ▼ キャラ2：011 ↔ 012 ↔ 011…
   setupCharacterFade(".char2", [
-    "image/character011.png",
-    "image/character012.png"
+    "image/character011.webp",
+    "image/character012.webp"
   ], 7000);
 
     // ▼ キャラ3：021 ↔ 022 ↔ 021…
   setupCharacterFade(".char3", [
-    "image/character021.png",
-    "image/character022.png"
+    "image/character021.webp",
+    "image/character022.webp"
   ], 7000);
 
     // ▼ キャラ4：021 ↔ 022 ↔ 021…
   setupCharacterFade(".char4", [
-    "image/character031.png",
-    "image/character032.png"
+    "image/character031.webp",
+    "image/character032.webp"
   ], 7000);
 
     // ▼ キャラ5：021 ↔ 022 ↔ 021…
   setupCharacterFade(".char5", [
-    "image/character041.png",
-    "image/character042.png"
+    "image/character041.webp",
+    "image/character042.webp"
   ], 7000);
 
 });

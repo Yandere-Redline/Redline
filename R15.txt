@@ -315,10 +315,7 @@ header a:hover {
       <a href="index.html#top"><span lang="en">Top</span></a>
       <a href="index.html#story"><span lang="en">Story</span></a>
       <a href="index.html#character"><span lang="en">Character</span></a>
-      <a href="https://www.youtube.com/@Yandere-Redline" target="_blank">
-        <span lang="en">Youtube</span>
-      </a>
-      
+      <a href="index.html#youtube"><span lang="en">Youtube</span></a>
     </header>
 
     <!-- R15 ヘッダーブロック -->
@@ -336,7 +333,7 @@ header a:hover {
 
       <!-- 作品1：ひなみ・ヤンデレ寄り -->
       <article class="r15-card r15-card--yandere">
-        <img src="R15_image/R15_001.webp" 
+        <img src="R15_image/Z_R15_001.png" 
              alt="白影ひなみ R15ボイス作品『魔物狩りの夜這い』" 
              class="r15-thumb"
              data-audio="R15_audio/R15_001.mp3">
@@ -367,7 +364,7 @@ header a:hover {
 
       <!-- 作品2 -->
       <article class="r15-card r15-card--yandere">
-        <img src="R15_image/R15_002.webp" 
+        <img src="R15_image/Z_R15_002.png" 
              alt="ノクティア R15ボイス作品『清楚彼女の美脚責め』" 
              class="r15-thumb"
              data-audio="R15_audio/R15_002.mp3">
@@ -402,21 +399,19 @@ header a:hover {
 
       <!-- 作品3：エフェリア・調教寄り -->
       <article class="r15-card r15-card--yandere">
-        <img src="R15_image/R15_003.webp" 
-             alt="紅 R15ボイス作品『清楚彼女の美脚責め』" 
+        <img src="R15_image/Z_R15_003.png" 
+             alt="麗奈 R15ボイス作品『清楚彼女の美脚責め』" 
              class="r15-thumb"
              data-audio="R15_audio/R15_003.mp3">
         <div class="r15-info">
-          <h2 class="r15-work-title">ママの徹底甘やかし</h2>
-          <p class="r15-chara">紅</p>
+          <h2 class="r15-work-title">地下室の調教</h2>
+          <p class="r15-chara">エフェリア</p>
           <p class="r15-quote">
-            「ママがたっぷり、お仕置きしてあげる――」
+            「興奮してるのですか、ご主人様――？」
           </p>
           <p class="r15-desc">
-          紅とあなたの赤ちゃんロールプレイ。<br>
-          指ちゅぱ、耳舐め、キスで徹底的に甘やかしてくれる。<br>
-          ママの腕の中で、ただ吸いついていればいい。<br>
-          極上の母性に包まれる、癒しボイス―<br>
+            静かな地下室で、エフェリアがあなたを椅子に座らせ、耳元で囁きながらじわじわ追い詰めていく。<br>
+            優しさと支配が絡み合う、危うい夜。
           </p>
   
           <!-- ★タイムスタンプ -->
@@ -428,7 +423,7 @@ header a:hover {
             <button type="button" class="timestamp-btn" data-time="589">09:49 甘やかし</button>
           </div>
 
-          <p class="r15-tags">#甘やかし #母性 #キス #耳責め #紅</p>
+          <p class="r15-tags">#囁き #支配 #耳責め #エフェリア</p>
         </div>
       </article>
 
