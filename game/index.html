@@ -3,30 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Yandere-Redline</title>
+    <title>Unity WebGL Player | Yandere-Redline-24h</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #000000; /* 背景を黒に変更 */
-    }
-
-    #unity-container {
-      background-color: #000000;
-    }
-
-    #unity-loading-bar,
-    #unity-footer,
-    #unity-warning {
-      background-color: #000000;
-    }
-  </style>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <canvas id="unity-canvas" width=1280 height=720></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -37,7 +20,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Yandere-Redline</div>
+        <div id="unity-build-title">Yandere-Redline-24h</div>
       </div>
     </div>
     <script>
@@ -73,14 +56,14 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/game.loader.js";
+      var loaderUrl = buildUrl + "/ビルドGL.loader.js";
       var config = {
-        dataUrl: buildUrl + "/game.data.unityweb",
-        frameworkUrl: buildUrl + "/game.framework.js.unityweb",
-        codeUrl: buildUrl + "/game.wasm.unityweb",
+        dataUrl: buildUrl + "/ビルドGL.data.unityweb",
+        frameworkUrl: buildUrl + "/ビルドGL.framework.js.unityweb",
+        codeUrl: buildUrl + "/ビルドGL.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
-        productName: "Yandere-Redline",
+        productName: "Yandere-Redline-24h",
         productVersion: "1.0",
         showBanner: unityShowBanner,
       };
@@ -110,8 +93,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "1280px";
+        canvas.style.height = "720px";
       }
 
       loadingBar.style.display = "block";
