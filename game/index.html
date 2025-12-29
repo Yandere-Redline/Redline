@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #000; /* ← 外側を黒 */
+  }
+
+  /* canvasの下地も黒（ロード中の白防止） */
+  #unity-canvas {
+    background: #000;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* 画面中央寄せ（必要なら） */
+  body {
+    display: grid;
+    place-items: center;
+  }
+</style>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Yandere-Redline-24h</title>
