@@ -1,37 +1,265 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
-<style>
-  html, body {
-    margin: 0;
-    height: 100%;
-    background: #000; /* ← 外側を黒 */
-  }
-
-  /* canvasの下地も黒（ロード中の白防止） */
-  #unity-canvas {
-    background: #000;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* 画面中央寄せ（必要なら） */
-  body {
-    display: grid;
-    place-items: center;
-  }
-</style>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Yandere-Redline-24h</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+
+ <style>
+  /* Unityテンプレの absolute 中央寄せを解除して、通常の縦並びに戻す */
+  #unity-container {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 24px auto 50px  !important;
+  }
+
+</style>
+
+<style>
+
+@font-face {
+  font-family: 'TypedeerMonoStamp';
+  src: url('TypedeerMono-Stamp.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  font-family: 'Noto Serif JP', serif;
+}
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000000 !important;
+  }
+
+  .page{
+  padding-top: 40px; /* ← ヘッダーの高さに合わせて調整（例: 60〜120） */
+}
+
+  /* --- ヘッダー --- */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px 0 14px;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    font-family: 'TypedeerMonoStamp', monospace;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000; /* モーダルより上に */
+  }
+
+  header a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+
+  header a:hover {
+    opacity: 0.7;
+  }
+
+  /* Unity周りも黒に統一（余白やフッター部分の色対策） */
+  #unity-container,
+  #unity-canvas,
+  #unity-footer,
+  #unity-loading-bar,
+  #unity-warning {
+    background: #000000 !important;
+  }
+
+  /* CG 横一列 */
+  .cg-row{
+    width: min(1280px, 96vw);
+    margin: 18px auto 40px;
+    padding: 14px 0 10px;
+    border-top: 1px solid rgba(0,0,0,0.08); /* 白背景用の薄い区切り */
+  }
+  .cg-strip{
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 6px 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cg-strip::-webkit-scrollbar{ height: 10px; }
+  .cg-strip::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.18); border-radius: 999px; }
+  .cg-strip::-webkit-scrollbar-track{ background: rgba(255,255,255,0.06); border-radius: 999px; }
+
+  .cg-item{
+    flex: 0 0 auto;
+    width: 240px;            /* 好みで調整 */
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: transform .12s ease, border-color .12s ease;
+  }
+
+  .cg-item:hover{
+    transform: translateY(-2px);
+    border-color: rgba(255, 43, 43, 0.55);
+  }
+
+  .cg-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* モーダル（拡大表示） */
+  .cg-modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+  .cg-modal.is-open{ display: flex; }
+
+  .cg-modal-inner{
+    width: min(1200px, 96vw);
+    max-height: 92vh;
+    background: rgba(10,10,10,0.85);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 60px rgba(0,0,0,0.55);
+  }
+
+  .cg-modal-img{
+    width: 100%;
+    height: auto;
+    max-height: 92vh;
+    object-fit: contain;
+    background: #000;
+    display: block;
+  }
+
+  .cg-modal-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .cg-modal-close:hover{
+    border-color: rgba(255, 43, 43, 0.65);
+    color: #ff2b2b;
+  }
+
+/* 疑似フレーム（外枠） */
+.unity-frame{
+  width: min(1280px, 96vw);
+  margin: 0 auto;
+  padding: 5px;            /* フレームの太さ */
+  background: #001f86;      /* 外枠の単色 */
+  border-radius: 0px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+}
+
+/* canvasを枠にフィット */
+#unity-canvas{
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+}
+
+/* ゲーム説明（UnityとCGの間） */
+.game-desc{
+  width: min(1280px, 96vw);
+  margin: 26px auto 18px;
+  text-align: center;
+}
+
+.game-desc-title{
+  margin: 0 0 14px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 0.14em;
+  color: #ff2b2b;
+}
+
+.game-desc-body{
+  margin: 0 auto 18px;
+  max-width: 56em;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+}
+
+.game-desc-final{
+  margin: 0;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: #ff2b2b;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.65);
+}
+
+</style>
+    
   </head>
+
   <body>
+
+  <header>
+    <a href="../#top"><span lang="en">Top</span></a>
+    <a href="../#story"><span lang="en">Story</span></a>
+    <a href="../#character"><span lang="en">Character</span></a>
+    <a href="https://www.youtube.com/@Yandere-Redline" target="_blank" rel="noopener"><span lang="en">Youtube</span></a>
+  </header>
+
+
+    <div class="page">
+    
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1280 height=720></canvas>
+  <div class="unity-frame">
+    <div class="unity-mat">
+      <canvas id="unity-canvas" width="1280" height="720"></canvas>
+    </div>
+  </div>
+
+
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -44,7 +272,61 @@
         <div id="unity-fullscreen-button"></div>
         <div id="unity-build-title">Yandere-Redline-24h</div>
       </div>
+    </div>  <!-- ★ここで閉じる（重要） -->
+
+    <!-- ★説明文ブロック（ここに入れる） -->
+    <section class="game-desc" aria-label="ゲーム説明">
+      <h2 class="game-desc-title">―全ルート、ヤンデレ―</h2>
+
+      <p class="game-desc-body">
+        あなたの選んだ言葉で彼女の“歪愛”が深まっていきます。<br>
+        期待させる言葉を選ぶほど歪愛は加速します。<br><br>
+        最後は3つのエンディングへ。<br>
+        どのルートでも―
+      </p>
+
+      <p class="game-desc-final">
+        ヤンデレエンドで結ばれます。
+      </p>
+    </section>
+
+    <!-- CG（ゲームの下） -->
+    <section class="cg-row" aria-label="CG Gallery">
+      <div class="cg-strip">
+        <!-- 画像はあなたのファイル名に差し替えOK -->
+        <button class="cg-item" type="button" data-full="cg/full/cg01.png" aria-label="CG01">
+          <img src="cg/thumb/cg01.png" alt="CG01">
+        </button>
+
+        <button class="cg-item" type="button" data-full="cg/full/cg02.png" aria-label="CG02">
+          <img src="cg/thumb/cg02.png" alt="CG02">
+        </button>
+
+        <button class="cg-item" type="button" data-full="cg/full/cg03.png" aria-label="CG03">
+          <img src="cg/thumb/cg03.png" alt="CG03">
+        </button>
+
+        <button class="cg-item" type="button" data-full="cg/full/cg04.png" aria-label="CG04">
+          <img src="cg/thumb/cg04.png" alt="CG04">
+        </button>
+
+        <button class="cg-item" type="button" data-full="cg/full/cg05.png" aria-label="CG05">
+          <img src="cg/thumb/cg05.png" alt="CG05">
+        </button>
+      </div>
+    </section>
+
+    <!-- 拡大モーダル -->
+    <div id="cg-modal" class="cg-modal" aria-hidden="true">
+      <div class="cg-modal-inner" role="dialog" aria-modal="true" aria-label="CG Preview">
+        <button id="cg-modal-close" class="cg-modal-close" type="button" aria-label="閉じる">×</button>
+        <img id="cg-modal-img" class="cg-modal-img" src="" alt="">
+      </div>
     </div>
+
+   </div>
+
+
     <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -78,11 +360,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/ビルドGLnew.loader.js";
+      var loaderUrl = buildUrl + "/ビルド.loader.js";
       var config = {
-        dataUrl: buildUrl + "/ビルドGLnew.data",
-        frameworkUrl: buildUrl + "/ビルドGLnew.framework.js",
-        codeUrl: buildUrl + "/ビルドGLnew.wasm",
+        dataUrl: buildUrl + "/ビルド.data",
+        frameworkUrl: buildUrl + "/ビルド.framework.js",
+        codeUrl: buildUrl + "/ビルド.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Yandere-Redline-24h",
@@ -137,5 +419,48 @@
       };
       document.body.appendChild(script);
     </script>
+
+<script>
+  const modal = document.getElementById("cg-modal");
+  const modalImg = document.getElementById("cg-modal-img");
+  const modalClose = document.getElementById("cg-modal-close");
+
+  function openCgModal(src, alt){
+    modalImg.src = src;
+    modalImg.alt = alt || "";
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCgModal(){
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    modalImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll(".cg-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const full = btn.getAttribute("data-full");
+      const img = btn.querySelector("img");
+      openCgModal(full || (img ? img.src : ""), img ? img.alt : "");
+    });
+  });
+
+  modalClose.addEventListener("click", closeCgModal);
+
+  // 背景クリックで閉じる
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeCgModal();
+  });
+
+  // ESCで閉じる
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeCgModal();
+  });
+</script>
+
+
   </body>
 </html>
