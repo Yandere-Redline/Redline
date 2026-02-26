@@ -1,0 +1,67 @@
+{
+  "id": "PR02",
+  "backgroundRef": "bg.main",
+  "mainCgRef": "PR.ep002.0main",
+  "cgFrame": { "aspect": "16:9", "offsetY": "-34%" },
+
+   "steps": [
+        { "t": "彼女の正体" },
+        { "t": "私は人間じゃない、蜘蛛の魔物なの…" ,"voiceRef": "PRvo.ep02.001"},
+        { "t": "君なら受け入れてくれるよね？" ,"voiceRef": "PRvo.ep02.002"}
+  ],
+
+  "choices": [
+    { "label": "受け入れる", "to": "normal001" },
+        { "label": "逃げる",       "to": "bad001" },
+    { "label": "自ら差し出す",       "to": "yandere001" }
+  ],
+
+  "nodes": {
+    "normal001": {
+      "kind": "normal",
+      "transitionRef": "tr.paper001",
+      "cgRef": "cg.ep002.1normal",
+      "steps": [
+        { "t": "嬉しい…\n受け入れてくれるかすごく不安だったの…！" },
+        { "t": "安心したら…\n泣けてきちゃった…" },
+        { "t": "君はいつも私を泣かせるんだね…" },
+        { "t": "今日は一緒に寝よ？" },
+        { "t": "魔物の体力は人間の比じゃないから、" },
+        { "t": "朝までぶっ壊れるまで\n愛してあげる…フフフ" }
+      ],
+      "end": true
+    },
+
+    "yandere001": {
+      "kind": "yandere",
+      "transitionRef": "tr.stamp001",
+      "cgRef": "cg.ep002.2yandere",
+      "steps": [
+        { "t": "私をここまで\n求めてくれたのは君がはじめて…" },
+        { "t": "やっぱり君は最高だよ…！" },
+        { "t": "今すぐグチャグチャになるまで\n食べちゃいたい…" },
+        { "t": "なーんてね！\nずっと２人で一緒に暮らすんだもん" },
+        { "t": "少しずつ少しずつ…" }, 
+        { "t": "私の毒で依存させてあげる…" }
+      ],
+      "end": true
+    },
+
+    "bad001": {
+      "kind": "bad",
+      "transitionRef": "tr.ink001",
+      "cgRef": "PR.ep002.3bad",
+      "steps": [
+        { "t": "あの女と会ってからおかしくなっちゃったのかなぁ？", "voiceRef": "PRvo.ep02.bad.001" },
+        { "t": "彼氏君が私から逃げるわけないもん…", "voiceRef": "PRvo.ep02.bad.002" },
+        { "t": "私の刻印を身体に刻んであげようね！" , "voiceRef": "PRvo.ep02.bad.003"},
+        { "t": "愛してる…結婚しよっか？", "voiceRef": "PRvo.ep02.bad.004" }
+      ],
+      "end": true
+    }
+
+
+  }
+
+  
+}

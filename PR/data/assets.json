@@ -1,0 +1,157 @@
+{
+  "bg.main": "./Image/bg.1normal.webp",
+  "bg_yandere": "./Image/bg.2yandere.webp",
+
+  "cg.ep001.0main": "./Image/ep001.0main.png",
+  "cg.ep001.1normal": "./Image/ep001.1normal.png",
+  "cg.ep001.2yandere": "./Image/ep001.2yandere.png",
+  "cg.ep001.3bad": "./Image/ep001.3bad.png",
+
+  "cg.ep002.0main": "./Image/ep002.0main.png",
+  "cg.ep002.1normal": "./Image/ep002.1normal.png",
+  "cg.ep002.2yandere": "./Image/ep002.2yandere.png",
+  "cg.ep002.3bad": "./Image/ep002.3bad.png",
+
+  "cg.ep003.0main": "./Image/ep003.0main.png",
+  "cg.ep003.1normal": "./Image/ep003.1normal.png",
+  "cg.ep003.2yandere": "./Image/ep003.2yandere.png",
+  "cg.ep003.3bad": "./Image/ep003.3bad.png",
+
+  "cg.ep004.0main": "./Image/ep004.0main.png",
+  "cg.ep004.1normal": "./Image/ep004.1normal.png",
+  "cg.ep004.2yandere": "./Image/ep004.2yandere.png",
+  "cg.ep004.3bad": "./Image/ep004.3bad.png",
+
+  "cg.ep005.0main": "./Image/ep005.0main.png",
+  "cg.ep005.1normal": "./Image/ep005.1normal.png",
+  "cg.ep005.2yandere": "./Image/ep005.2yandere.png",
+  "cg.ep005.3bad": "./Image/ep005.3bad.png",
+
+  "vo.ep01.001": "./Audio/vo.ep001.001.mp3",
+  "vo.ep01.002": "./Audio/vo.ep001.002.mp3",
+  "vo.ep01.003": "./Audio/vo.ep001.003.mp3",
+
+  "vo.ep01.bad.001": "./Audio/vo.ep001.bad.001.mp3",
+  "vo.ep01.bad.002": "./Audio/vo.ep001.bad.002.mp3",
+  "vo.ep01.bad.003": "./Audio/vo.ep001.bad.003.mp3",
+  "vo.ep01.bad.004": "./Audio/vo.ep001.bad.004.mp3",
+  "vo.ep01.bad.005": "./Audio/vo.ep001.bad.005.mp3",
+  "vo.ep01.bad.006": "./Audio/vo.ep001.bad.006.mp3",
+
+
+
+
+  "ui.markX": "./Image/ui/mark_x.png",
+  "ui.textBoxFrame": "./Image/ui/textbox_frame.png",
+  "ui.choiceBtn": "./Image/ui/choice_btn.png",
+  
+  "ui.pageCurlR": "./Image/ui/pageCurl_right.png",
+  "ui.pageCurlL": "./Image/ui/pageCurl_left.png",
+  "ui.pageCurl": "./Image/ui/page_curl.png",
+
+
+
+  "textbox_frame_Yandere": "./Image/ui/textbox_frame_Yandere.png",
+  "choice_btn_Yandere": "./Image/ui/choice_btn_Yandere.png",
+
+
+  "se.tap": "./Audio/se_tap.mp3",
+  "se.choice": "./Audio/se_choice.mp3",
+  "se.pageTurn": "./Audio/se_page.mp3",
+
+  "fx.glitch001": "./Image/transitions/fx.glitch001.webp",
+  "fx.glitch002": "./Image/transitions/fx.glitch002.webp",
+  "fx.glitch003": "./Image/transitions/fx.glitch003.webp",
+  "fx.glitch004": "./Image/transitions/fx.glitch004.webp",
+
+  "fx.ink001": "./Image/transitions/fx.ink001.png",
+  "fx.ink002": "./Image/transitions/fx.ink002.png",
+  "fx.ink003": "./Image/transitions/fx.ink003.png",
+  "fx.ink004": "./Image/transitions/fx.ink004.png",
+  "fx.ink005": "./Image/transitions/fx.ink005.png",
+  "fx.ink006": "./Image/transitions/fx.ink006.png",
+  "fx.ink007": "./Image/transitions/fx.ink007.png",
+  "fx.ink008": "./Image/transitions/fx.ink008.png",
+
+  "fx.spider001": "./Image/transitions/fx.spider001.png",
+
+  "se.glitch1": "./Audio/SE/glitch1.mp3",
+   "se.ink1": "./Audio/SE/ink1.wav",
+
+  "PR.ep001.0main": "./Image/PR/ep001.0main.webp",
+  "PR.ep001.3bad": "./Image/PR/ep001.3bad.webp",
+
+  "PR.ep002.0main": "./Image/PR/ep002.0main.webp",
+  "PR.ep002.3bad": "./Image/PR/ep002.3bad.webp",
+
+  "PR.ep003.0main": "./Image/PR/ep003.0main.webp",
+  "PR.ep003.3bad": "./Image/PR/ep003.3bad.webp",
+
+  "PR.ep004.0main": "./Image/PR/ep004.0main.webp",
+  "PR.ep004.3bad": "./Image/PR/ep004.3bad.webp",
+
+  "PR.ep005.0main": "./Image/PR/ep005.0main.webp",
+  "PR.ep005.3bad": "./Image/PR/ep005.3bad.webp",
+
+  "PR.ep006.0main": "./Image/PR/ep006.0main.webp",
+  "PR.ep006.3bad": "./Image/PR/ep006.3bad.webp",
+  
+  "PR.ep007.0main": "./Image/PR/ep007.0main.webp",
+  "PR.ep007.3bad": "./Image/PR/ep007.3bad.webp",
+
+  "PRvo.ep01.001": "./Audio/PR/vo.ep001.0main.001.mp3",
+  "PRvo.ep01.002": "./Audio/PR/vo.ep001.0main.002.mp3",
+  "PRvo.ep01.003": "./Audio/PR/vo.ep001.0main.003.mp3",
+  "PRvo.ep01.bad.001": "./Audio/PR/vo.ep001.3bad.001.mp3",
+  "PRvo.ep01.bad.002": "./Audio/PR/vo.ep001.3bad.002.mp3",
+  "PRvo.ep01.bad.003": "./Audio/PR/vo.ep001.3bad.003.mp3",
+  "PRvo.ep01.bad.004": "./Audio/PR/vo.ep001.3bad.004.mp3",
+
+  "PRvo.ep02.001": "./Audio/PR/vo.ep002.0main.001.mp3",
+  "PRvo.ep02.002": "./Audio/PR/vo.ep002.0main.002.mp3",
+  "PRvo.ep02.bad.001": "./Audio/PR/vo.ep002.3bad.001.mp3",
+  "PRvo.ep02.bad.002": "./Audio/PR/vo.ep002.3bad.002.mp3",
+  "PRvo.ep02.bad.003": "./Audio/PR/vo.ep002.3bad.003.mp3",
+  "PRvo.ep02.bad.004": "./Audio/PR/vo.ep002.3bad.004.mp3",
+
+  "PRvo.ep03.001": "./Audio/PR/vo.ep003.0main.001.mp3",
+  "PRvo.ep03.002": "./Audio/PR/vo.ep003.0main.002.mp3",
+  "PRvo.ep03.bad.001": "./Audio/PR/vo.ep003.3bad.001.mp3",
+  "PRvo.ep03.bad.002": "./Audio/PR/vo.ep003.3bad.002.mp3",
+  "PRvo.ep03.bad.003": "./Audio/PR/vo.ep003.3bad.003.mp3",
+
+  "PRvo.ep04.001": "./Audio/PR/vo.ep004.0main.001.mp3",
+  "PRvo.ep04.002": "./Audio/PR/vo.ep004.0main.002.mp3",
+  "PRvo.ep04.003": "./Audio/PR/vo.ep004.0main.003.mp3",
+  "PRvo.ep04.bad.001": "./Audio/PR/vo.ep004.3bad.001.mp3",
+  "PRvo.ep04.bad.002": "./Audio/PR/vo.ep004.3bad.002.mp3",
+  "PRvo.ep04.bad.003": "./Audio/PR/vo.ep004.3bad.003.mp3",
+  "PRvo.ep04.bad.004": "./Audio/PR/vo.ep004.3bad.004.mp3",
+
+  "PRvo.ep05.001": "./Audio/PR/vo.ep005.0main.001.mp3",
+  "PRvo.ep05.002": "./Audio/PR/vo.ep005.0main.002.mp3",
+  "PRvo.ep05.bad.001": "./Audio/PR/vo.ep005.3bad.001.mp3",
+  "PRvo.ep05.bad.002": "./Audio/PR/vo.ep005.3bad.002.mp3",
+  "PRvo.ep05.bad.003": "./Audio/PR/vo.ep005.3bad.003.mp3",
+  "PRvo.ep05.bad.004": "./Audio/PR/vo.ep005.3bad.004.mp3",
+
+  "PRvo.ep06.001": "./Audio/PR/vo.ep006.0main.001.mp3",
+  "PRvo.ep06.002": "./Audio/PR/vo.ep006.0main.002.mp3",
+  "PRvo.ep06.003": "./Audio/PR/vo.ep006.0main.003.mp3",
+  "PRvo.ep06.bad.001": "./Audio/PR/vo.ep006.3bad.001.mp3",
+  "PRvo.ep06.bad.002": "./Audio/PR/vo.ep006.3bad.002.mp3",
+  "PRvo.ep06.bad.003": "./Audio/PR/vo.ep006.3bad.003.mp3",
+  "PRvo.ep06.bad.004": "./Audio/PR/vo.ep006.3bad.004.mp3",
+  "PRvo.ep06.bad.005": "./Audio/PR/vo.ep006.3bad.005.mp3",
+
+  "PRvo.ep07.001": "./Audio/PR/vo.ep007.0main.001.mp3",
+  "PRvo.ep07.002": "./Audio/PR/vo.ep007.0main.002.mp3",
+  "PRvo.ep07.003": "./Audio/PR/vo.ep007.0main.003.mp3",
+  "PRvo.ep07.bad.001": "./Audio/PR/vo.ep007.3bad.001.mp3",
+  "PRvo.ep07.bad.002": "./Audio/PR/vo.ep007.3bad.002.mp3",
+  "PRvo.ep07.bad.003": "./Audio/PR/vo.ep007.3bad.003.mp3",
+  "PRvo.ep07.bad.004": "./Audio/PR/vo.ep007.3bad.004.mp3",
+  "PRvo.ep07.bad.005": "./Audio/PR/vo.ep007.3bad.005.mp3",
+  "PRvo.ep07.bad.006": "./Audio/PR/vo.ep007.3bad.006.mp3"
+
+}

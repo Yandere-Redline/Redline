@@ -1,0 +1,83 @@
+{
+  "defaults": {
+    "choice_normal": ["tr.default_01"],
+    "choice_bad": ["tr.glitch_01"]
+  },
+
+
+  "tr.default_01": {
+    "swapAtFrame": 1,
+    "fadeOutMs": 0,
+    "frames": [
+      { "color": "#000", "ms": 70 },
+      { "color": "#000", "ms": 500, "seRef": "se.glitch" }
+    ]
+  },
+
+
+
+  "tr.glitch_01": {
+    "swapAtFrame": 4,
+    "fadeOutMs": 0,
+    "frames": [
+      { "color": "#ffffff", "ms": 50,"seRef": "se.glitch1" },
+      { "assetRef": "fx.glitch001", "ms": 50 },
+      { "assetRef": "fx.glitch002", "ms": 50 },
+      { "assetRef": "fx.glitch003", "ms": 70 },
+      { "assetRef": "fx.glitch004", "ms": 70 },
+      { "color": "#ffffff", "ms": 50 }
+    ]
+  },
+
+  "tr.spider01": {
+    "durationMs": 260,
+    "tilt": { "deg": -20, "ms": 180 },
+    "swapAtFrame": 1,
+    "frames": [
+      { "assetRef": "fx.spider001", "ms": 10000 }
+    ]
+  },
+
+
+  "tr.normal_02": {
+    "swapAtFrame": 11,
+    "fadeOutMs": 0,
+    "frames": [
+      { "assetRef": "fx.ink001", "ms": 100 , "seRef": "se.ink1"},
+      { "assetRef": "fx.ink002", "ms": 100 },
+      { "assetRef": "fx.ink003", "ms": 100 },
+      { "assetRef": "fx.ink004", "ms": 70 },
+      { "assetRef": "fx.ink005", "ms": 70 },
+      { "assetRef": "fx.ink006", "ms": 70 },
+      { "assetRef": "fx.ink007", "ms": 70 },
+      { "assetRef": "fx.ink008", "ms": 70 },
+      { "color": "#ff0000", "ms": 50 },
+      { "color": "#ffffff", "ms": 40 },
+      { "color": "#ffffff", "ms": 10 }
+
+    ]
+  },
+
+  "tr.bad_01": {
+    "swapAtFrame": 1,
+    "fadeOutMs": 0,
+    "frames": [
+      { "color": "#000", "ms": 70 },
+      { "color": "#000", "ms": 500, "seRef": "se.glitch" },
+      { "color": "transparent", "ms": 50 }
+    ]
+  },
+
+  "tr.bad_02": {
+    "swapAtFrame": 1,
+    "fadeOutMs": 0,
+    "frames": [
+      { "color": "#000", "ms": 40 },
+      { "color": "#000", "ms": 420 },
+      { "color": "transparent", "ms": 40 }
+    ]
+  }
+
+
+
+}

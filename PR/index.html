@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <!-- 追加：太めゴシック（M PLUS 1p） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <title>Short Prototype</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    :root{
+  --font-ui: "M PLUS 1p", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    body { background:#0a0a0a; font-family: var(--font-ui); }
+    
+    #text{
+      font-family: var(--font-ui);
+      font-weight: 800;  /* 700〜900で調整 */
+      letter-spacing: 0.02em;
+    }
+
+    button{
+  font-family: inherit;
+    }
+
+    .viewport{
+      min-height:100dvh; display:grid; place-items:center; padding:12px;
+    }
+
+    body.recordMode .viewport{
+  display:block !important;
+  padding:0 !important;
+}
+
+
+    .stage{
+      position:relative;
+      width: min(calc(100vw - 24px), calc((100dvh - 24px) * (9 / 16)));
+      height:min(calc(100dvh - 24px), calc((100vw - 24px) * (16 / 9)));
+      max-width:540px; max-height:960px;
+      overflow:hidden; border-radius:18px;
+      box-shadow:0 12px 40px rgba(0,0,0,.55);
+      background:#111;
+    }
+    @media (max-width:540px){
+      .viewport{ padding:0; }
+      .stage{ width:100vw; height:100dvh; max-width:none; max-height:none; border-radius:0; }
+    }
+
+
+    body.recordMode .stage{
+      width:1080px !important;
+      height:1920px !important;
+      max-width:none !important;
+      max-height:none !important;
+      border-radius:0 !important;
+    }
+
+
+    body.recordMode{
+      width: 1080px;
+      height: 1920px;
+      margin: 0 auto;
+      background: #000;
+      overflow: hidden;
+    }
+  
+
+    /* 背景はJSから差し替える（CSS変数で受ける） */
+    .bg{
+      position:absolute; inset:0;
+      background: var(--bg-image, none) center / cover no-repeat;
+      filter: brightness(.95) contrast(1.02);
+    }
+
+    /* safe(ブリード回避) */
+    .safe{
+      position:absolute;
+      inset:
+        calc(10% + env(safe-area-inset-top))
+        calc(7%  + env(safe-area-inset-right))
+        calc(10% + env(safe-area-inset-bottom))
+        calc(7%  + env(safe-area-inset-left));
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+    }
+
+    
+.cgWrap{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  transform: translateY(var(--cg-offset-y)); /* cgFrameに入ってたのを移す */
+}
+
+/* cgFrameは“メインCGを切り抜く箱”として残す */
+.cgFrame{
+  width:100%;
+  height:100%;
+  border-radius:5px;
+  overflow:hidden;
+  position: relative;
+  background: rgba(0,0,0,12);
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,5));
+}
+
+/* 背面フレーム：cgFrameの外側なので、はみ出しても切られない */
+.frameBack{
+  position:absolute;
+
+  /* 位置（ここをいじる） */
+  left:-10%;
+  top:-6%;
+
+  width:120%;
+  height:113%;
+  object-fit: contain;
+  pointer-events:none;
+  z-index: 0;
+}
+
+/* メインCG：cgFrame内に収めて前面に */
+.cgMain{
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  display:block;
+  position: relative;
+  z-index: 1;
+}
+
+
+    .cgFrame img{
+      width:100%; height:100%;
+      object-fit: contain;
+      display:block;
+    }
+
+      /* ===== Title Top ===== */
+  .titleTop{
+    position:absolute;
+    top: calc(6% + env(safe-area-inset-top));
+    left:40%;
+    transform: translateX(-50%);
+    width: min(70%, 700px);   /* 700x300想定 */
+    pointer-events:none;
+    z-index: 20;
+  }
+
+  /* ===== Logo Bottom ===== */
+  .logoBottom{
+    position:absolute;
+    bottom: calc(2% + env(safe-area-inset-bottom));
+    left:50%;
+    transform: translateX(-50%);
+    width: min(70%, 700px);   /* 700x300想定 */
+    pointer-events:none;
+    z-index: 20;
+  }
+
+
+
+
+.navBtn{
+  position:absolute; /* 既に absolute ならそのままでOK */
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 20; /* 既存のUIより前に */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 位置（ここは既存に合わせて調整） */
+.navBtnL{ left: 5px; top: 40%; transform: translateY(-50%); }
+.navBtnR{ right: 5px; top: 40%; transform: translateY(-50%); }
+
+/* 押下のtransformはimgに */
+.navBtn:active img{
+  transform: scale(0.98);
+}
+
+.navBtn img{
+  display:block;
+  width: 96px;   /* 好きなサイズに */
+  height: auto;
+  pointer-events:none; /* 画像をクリック判定にしない */
+  user-select:none;
+
+}
+/* 無効化してる場合の見た目 */
+.navBtn[disabled]{
+  opacity: .35;
+  cursor: default;
+  transform: none;
+}
+
+
+
+
+      .autoBtn{
+        position:absolute;
+        top: calc(10px + env(safe-area-inset-top));
+        right: calc(76px + env(safe-area-inset-right)); /* ▶ボタンの少し左 */
+        width: 96px;
+        height: 44px;
+        border:0;
+        border-radius:14px;
+        background: rgba(0,0,0,30);
+        color:#fff;
+        cursor:pointer;
+        z-index: 11;
+        backdrop-filter: blur(6px);
+        pointer-events: auto;
+        font-weight: 700;
+        letter-spacing: .04em;
+      }
+      .autoBtn.on{ background: rgba(180,0,0,35); }
+      .autoBtn:active{ transform: translateY(1px); }
+
+
+ /* HUD（安全帯内に置く） */
+.hud{
+  position:absolute;
+  inset:
+    calc(10% + env(safe-area-inset-top))
+    calc(7px + env(safe-area-inset-right))
+    calc(var(--hud-bottom, 24%) + env(safe-area-inset-bottom))
+    calc(12px + env(safe-area-inset-left));
+  transform: translateY(var(--hud-shift-y, -60px)); /* ここを調整 */
+  display:flex;                 /* ★grid をやめる（ズレの原因） */
+  flex-direction: column;
+  justify-content: flex-end;    /* 下に固定 */
+  align-items: center;
+  gap: 10px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+    /* テキストボックス（下） */
+    .textBox{
+        width: var(--tb-w, 650px);           /* ←スケールはこれだけで効く */
+        max-width: 85%; 
+        aspect-ratio: 170 / 35;
+        height: auto;
+      
+        inset: 0% 0% 0% 0%;  /* ★上 右 下 左：PNGの文字エリアに合わせる */
+      
+        /* PNG枠 */
+      background: transparent;
+      background-image: var(--ui-textbox-frame, none);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+
+      border-radius: 0;
+      padding: 0;                          /* ★枠はPNGで作るのでpaddingは中身側へ */
+      position: relative;
+    }
+
+
+    .tbInner{
+      position:absolute;
+      inset: 31% 0% 18% 9%;  /* ★上 右 下 左：PNGの文字エリアに合わせる */
+      display:flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 6px;
+      pointer-events:none;
+    }
+
+     .storyText{ color:#000000; font-size: clamp(12px, 3.2vw, 14px); line-height: 1.1; white-space: pre-line; }
+
+    /*.storyText{ color:#000000; font-size: clamp(16px, 3.2vw, 20px); line-height: 1.6; white-space: pre-line; }*/
+
+    .hint{ font-size: 12px; opacity: .75; }
+
+      /* ★選択肢：テキストボックスの“下”に重ねて表示（レイアウトを動かさない） */
+      .choices{
+        position:absolute;
+        left: 50%;
+        top: calc(100% + var(--choice-overlap, -7px)); /* 8px→舌に食い込ませたいならマイナスに */
+        transform: translateX(-50%) translateY(4px);
+
+        width: var(--tb-w, 650px);
+        max-width: 85%;
+        
+        display: grid;
+        gap: var(--choice-gap, 0px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 120ms ease, transform 120ms ease;
+      }
+      .choices.show{
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      @media (min-width: 541px){
+      :root{
+          --choice-overlap: -10px; /* ← -7px だと下に出過ぎるので、マイナスを強くする */
+          --hud-bottom: 21%;     /* 24%→増やすほど上に上がる */
+          --hud-shift-y: -110px; /* -60px→さらに上へ */
+           }
+       }
+
+
+      .choiceBtn{
+        position: relative; /* ←赤×の擬似要素用（既存があってもOK） */
+       
+        width: 100%;
+        max-width: 100%; 
+        aspect-ratio: 140 / 26;
+        height: auto;
+
+        inset: -2% 0% 0% 0%;  /* ★上 右 下 左：PNGの文字エリアに合わせる */
+        border: 0;
+        background: transparent;
+
+        /* ★PNGボタン（あれば上書き） */
+        background-image: var(--ui-choice-btn, none);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+      }
+      .choiceBtn:active{ transform: translateY(1px); }
+
+
+
+
+      /* トランジション層 */
+      .transitionFx{
+        position:absolute;
+        inset:0;
+        pointer-events:none;
+        z-index: 40;
+        opacity: 0;
+
+        background: transparent;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        will-change: opacity, background-image, transform, filter;
+      }
+
+
+
+      .nextWrap{
+        display:none;
+        pointer-events:auto;
+
+        /* ★ここ追加：flexのレイアウトから外す（textboxが押し上がらない） */
+        position:absolute;
+        left:50%;
+        bottom: -70px;                 /* 位置はここで調整（例：-40px とか） */
+        transform: translateX(-50%);
+        width: min(var(--tb-w, 650px), 85%);
+      }
+
+      .nextBtn{
+        width:100%;
+        padding: 14px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.18);
+        background: rgba(20,20,20,.58);
+        color:#fff;
+        font-size: 15px;
+        cursor:pointer;
+      }
+      .nextBtn:active{ transform: translateY(1px); }
+
+      .flashFx{
+      position: fixed;
+      inset: 0;
+      background: #000000;   /* 黒にしたければ #000 */
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      }
+
+      /* 一瞬で覆う（INは遷移させない） */
+      .flashFx.on{
+        opacity: 1;
+      }
+
+
+      .debugPanel{
+        position:absolute;
+        left:10px;
+        right:10px;
+        top:10px;
+        z-index: 9999;
+        padding:10px;
+        border-radius: 5px;
+        background: rgba(0,0,0,.70);
+        color:#fff;
+        font-size: 12px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+        display:none;
+      }
+
+    :root{
+      --mark-x-size: 100px;
+      --mark-x-left: 14px;
+      --frame-inset: 3.5%;
+    }      
+
+    /* 押した痕跡：赤× */
+    .choiceBtn{
+      position: relative; /* ← これ追加（擬似要素の基準） */
+      color:#000000; 
+      font-size: clamp(22px, 3.6vw, 24px);
+      line-height: 1.6; 
+      white-space: pre-line;
+    }
+
+    .choiceBtn::after{
+      content:"";
+      position:absolute;
+      left: var(--mark-x-left);
+      top: 50%;
+      width: var(--mark-x-size);
+      height: var(--mark-x-size);
+      transform: translateY(-50%) rotate(-10deg);
+      background: var(--mark-x-url, none) center / contain no-repeat;
+      opacity: 0;
+      transition: opacity 60ms ease;
+      pointer-events: none;
+    }
+
+    .choiceBtn.picked::after{
+      opacity: 1;
+    }
+
+    /* ===== PageTurn FX（右ボタン=左→右 / 左ボタン=右→左）===== */
+    .pageFx{
+      position:absolute;
+      inset:0;
+      z-index:15;
+      pointer-events:none;
+    }
+    
+    .pageFx.hidden{
+      opacity: 0;
+      visibility: hidden;
+    }
+
+
+    .pfLayer{ position:absolute; inset:0; }
+    .pfBg{ position:absolute; inset:0; background: center/cover no-repeat; }
+
+    .pfSafe{
+      position:absolute;
+      inset:
+        calc(10% + env(safe-area-inset-top))
+        calc(7%  + env(safe-area-inset-right))
+        calc(10% + env(safe-area-inset-bottom))
+        calc(7%  + env(safe-area-inset-left));
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+    }
+
+    .pfCgFrame{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:5px;
+      overflow:hidden;
+      background: rgba(0,0,0,.12);
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.5));
+      transform: translateY(var(--pf-offset-y, -18%));
+    }
+
+    .pfCg{
+      width:100%;
+      height:100%;
+      object-fit: contain;
+      display:block;
+    }
+
+
+    .cgFx{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:3; }
+    .cgFx.hidden{ display:none; }
+    .cgFx img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; }
+
+    .cgFxPrev{
+      --wipeX: 100%;
+      transition: --wipeX 500ms cubic-bezier(.2,.9,.2,1);
+    }
+    .cgFx.dir-rtl .cgFxPrev{ clip-path: polygon(0 0, var(--wipeX) 0, var(--wipeX) 100%, 0 100%); }
+    .cgFx.dir-ltr .cgFxPrev{ clip-path: polygon(var(--wipeX) 0, 100% 0, 100% 100%, var(--wipeX) 100%); }
+
+
+    @property --wipeX { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+
+    .pfPrev{
+      --wipeX: 100%;
+      transition: --wipeX 500ms cubic-bezier(.2,.9,.2,1);
+    }
+
+    /* rtl（右→左）：左〜境界まで見せる（100→0で消える） */
+    .pageFx.dir-rtl .pfPrev{
+      clip-path: polygon(0 0, var(--wipeX) 0, var(--wipeX) 100%, 0 100%);
+    }
+    /* ltr（左→右）：境界〜右まで見せる（0→100で消える） */
+    .pageFx.dir-ltr .pfPrev{
+      clip-path: polygon(var(--wipeX) 0, 100% 0, 100% 100%, var(--wipeX) 100%);
+    }
+
+    /* turning のときに境界を動かす */
+    .pageFx.turning.dir-rtl .pfPrev{ --wipeX: 0%; }
+    .pageFx.turning.dir-ltr .pfPrev{ --wipeX: 100%; }
+
+    .pfCurl{
+      position:absolute;
+      top:0;
+      left:0;
+      height:100%;
+      width:auto;
+      transform-origin:center center;
+      transform: translateX(0);
+      opacity:0;
+      transition: transform 900ms cubic-bezier(.2,.9,.2,1), opacity 60ms ease;
+      will-change: transform;
+    }
+    .pageFx.turning .pfCurl{ opacity:1; }
+
+
+
+    /* オート中だけ出して動かす（rootに .autoOn を付ける） */
+
+  .choiceBtn.autoPicked{
+    transform: translateY(1px) scale(1.02);
+    filter: brightness(1.08) drop-shadow(0 8px 12px rgba(0,0,0,.28));
+  }
+
+  /* ===== Horror ghost cursor ===== */
+.ghostCursor{
+  position: fixed;            /* 画面座標で動かす */
+  left: 50vw;
+  top: 50vh;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-20%, -10%) scale(.98);
+  z-index: 80;                /* choices より上に出す */
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,.55));
+  transition: opacity 180ms ease;
+  will-change: left, top, transform, opacity;
+}
+
+/* AUTO中だけ表示（あなたは既に .autoOn を付けてる） */
+.autoOn .ghostCursor.ghostShow { opacity: .95; }
+
+
+/* 形：白い矢印カーソル（簡易） */
+.ghostCursor::before{
+  content:"";
+  display:block;
+  width:100%;
+  height:100%;
+  background: rgb(255, 255, 255);
+  clip-path: polygon(
+    0% 0%, 0% 100%, 26% 74%, 40% 100%,
+    56% 92%, 42% 66%, 78% 66%
+  );
+}
+
+/* うっすら呼吸（怖さ） */
+.autoOn .ghostCursor.ghostShow { animation: ghostBreath 5.0s infinite ease-in-out; }
+@keyframes ghostBreath{
+  0%,100%{ transform: translate(-20%, -10%) scale(.98); }
+  50%{ transform: translate(-20%, -10%) scale(1.03); }
+}
+
+  /* === record(録画)モードだけUIを大きくする === */
+  body.recordMode{
+    --hud-bottom: 26%;      /* 数字を上げるほどHUDが上に来る（おすすめ 26〜32%） */
+    --hud-shift-y: -140px;  /* もっと上げたいなら -160px など */
+    --choice-overlap: -16px;/* choicesをtextboxに“食い込ませる”（-10→-16 など） */
+    --tb-w: 900px;        /* 650px → 900px（85%上限=918pxの手前） */
+    --choice-gap: 6px;    /* 好みで */
+    --mark-x-size: 200px; /* 120〜160で好み */
+    --mark-x-left: 18px;  /* 大きくした分、少し右へ寄せたいとき */
+  }
+
+  /* ついでに文字も少しだけ大きく（任意） */
+  body.recordMode .storyText{
+    font-size: clamp(32px, 2.0vw, 32px);
+  }
+  body.recordMode .choiceBtn{
+    font-size: clamp(40px, 2.2vw, 40px);
+  }
+
+  /* もっと横いっぱい使いたいなら（任意） */
+  body.recordMode .textBox{
+    max-width: 80%;
+  }
+
+  body.recordMode .choices{
+    max-width: 80%;
+  }
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="viewport">
+    <main class="stage" id="stage">
+      <div class="bg" aria-hidden="true"></div>
+
+          <button id="btnPrev" class="navBtn navBtnL" aria-label="前へ">
+               <img src="./Image/UI/btn_left.png" alt="">
+          </button>
+          
+         <button id="btnNext" class="navBtn navBtnR" aria-label="次へ">
+               <img src="./Image/UI/btn_right.png" alt="">
+          </button>
+          
+          <button class="autoBtn" id="btnAuto" aria-label="auto">AUTO</button>
+
+          <div class="safe">  
+
+          <div class="cgWrap">
+            <img id="frameBack" class="frameBack" src="./Image/frame.webp" alt="">
+            <div class="cgFrame">
+              <img id="cgImg" class="cgMain" src="./Image/MainCg.png" alt="main cg" />
+                <div id="cgFx" class="cgFx hidden dir-ltr" aria-hidden="true">
+                <img class="cgFxNext" alt="">
+                <img class="cgFxPrev" alt="">
+              </div>
+
+            </div>
+          </div>
+
+         </div>
+
+          <img id="titleTop" class="titleTop" src="./Image/title_top.png" alt="">
+          <img id="logoBottom" class="logoBottom" src="./Image/logo_bottom.png" alt="">
+
+      <!-- 最小HUD：テキスト + 選択肢 -->
+      <section id="hud" class="hud" aria-label="hud">
+       
+      <div id="textBox" class="textBox">
+        <div class="tbInner">
+          <div id="storyText" class="storyText"></div>
+        
+        </div>
+        <div id="choices" class="choices" aria-label="choices"></div>
+      </div>
+
+        <div id="nextWrap" class="nextWrap">
+          <button id="btnNextEp" class="nextBtn">Next Ep.</button>
+        </div>
+      </section>
+
+      <!-- 仮トランジション用 -->
+      <div id="transitionFx" class="transitionFx" aria-hidden="true"></div>
+
+      <div id="pageFx" class="pageFx hidden">
+      <div class="pfLayer pfNext">
+        <div class="pfBg"></div>
+        <div class="pfSafe">
+          <div class="pfCgFrame">
+            <img class="pfCg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="pfLayer pfPrev">
+        <div class="pfBg"></div>
+        <div class="pfSafe">
+          <div class="pfCgFrame">
+            <img class="pfCg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <img id="pfCurl" class="pfCurl" alt="">
+    </div>
+
+    <pre id="debugPanel" class="debugPanel" aria-hidden="true"></pre>
+    </main>
+  </div>
+
+  <script src="./app.js" defer></script>
+  <div id="ghostCursor" class="ghostCursor" aria-hidden="true"></div>
+  <div id="flashFx" class="flashFx" aria-hidden="true"></div>
+</body>
+</html>
