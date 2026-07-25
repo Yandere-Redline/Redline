@@ -988,6 +988,39 @@
       .footer { flex-direction: column; gap: 18px; }
       .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
     }
+
+
+    .gameplay-video-lead {
+      margin: -4px 0 18px;
+      color: #aaaab4;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .gameplay-video {
+      transition:
+        transform .18s ease,
+        opacity .18s ease;
+    }
+
+    .gameplay-video:hover {
+      transform: translateY(-2px);
+    }
+
+    .gameplay-video:hover .thumb {
+      border-color: rgba(255,45,120,.65);
+      box-shadow: 0 0 18px rgba(255,45,120,.18);
+    }
+
+    .gameplay-more {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      text-decoration: none;
+    }
+
+
+
   </style>
 </head>
 <body>
@@ -1166,6 +1199,21 @@
          <button class="more" onclick="renderRandomRelatedVideos()">もっと見る</button>
       </section>
 
+  <section class="side-card gameplay-video-card">
+  <div class="side-title">🎮 ゲームプレイ動画</div>
+
+
+  <div id="gameplayVideoList" class="video-list"></div>
+
+  <a
+    class="more gameplay-more"
+    href="https://www.youtube.com/@Yandere-Redline"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    YouTubeでもっと見る
+  </a>
+</section>
 
   <section class="side-card">
   <div class="side-title">🔒 メンバー限定</div>
@@ -1398,7 +1446,7 @@ function resizeGameFrame() {
     {
       title: "【ASMR】「お風呂も一緒…」女剣士の溺愛護衛",
       channel: "白影ひなみ",
-      views: "2.7万 回視聴",
+      views: "3.2万 回視聴",
       thumb: "CG/thumb08.png",
       duration: "6:03",
       url: "https://youtu.be/f05haxd9PqY"
@@ -1406,7 +1454,7 @@ function resizeGameFrame() {
     {
       title: "【ASMR】「拒否権はないよ？」美人にお持ち帰り…",
       channel: "紅",
-      views: "2.7万 回視聴",
+      views: "2.5万 回視聴",
       thumb: "CG/thumb09.png",
       duration: "7:05",
       url: "https://youtu.be/tq6sX-aiUz0"
@@ -1419,6 +1467,17 @@ function resizeGameFrame() {
       duration: "7:30",
       url: "https://youtu.be/c_VWLJEtnbw"
     },
+
+    {
+      title: "【ASMR】メイドと添い寝シュミレーション",
+      channel: "エフェリア",
+      views: "4.2万 回視聴",
+      thumb: "CG/thumb12.png",
+      duration: "5:06",
+      url: "https://youtu.be/v6DxDFKXZDM"
+    },
+
+
     {
       title: "【ASMR】「私を食べて♡」逆ナン蜘蛛彼女の罠",
       channel: "ヴェルネーゼ",
@@ -1429,6 +1488,7 @@ function resizeGameFrame() {
     }
 
   ];
+
 
   function getRandomItems(array, count) {
     const copied = [...array];
@@ -1470,8 +1530,65 @@ function resizeGameFrame() {
   }
 
 
+  const gameplayVideos = [
+    {
+      title: "選択肢「配信を閉じる」",
+      channel: "セラ＝ミステリアス",
+      views: "YouTube Shorts",
+      thumb: "CG/gameplay_short01.png",
+      duration: "SHORT",
+      url: "https://youtube.com/shorts/QlkjlQ8sNFU"
+    },
+    {
+      title: "「住所変更してきたよ？」",
+      channel: "セラ＝ミステリアス",
+      views: "YouTube Shorts",
+      thumb: "CG/gameplay_short02.png",
+      duration: "SHORT",
+      url: "https://youtube.com/shorts/daVQ8WGzWs0"
+    },
+    {
+      title: "画面を割って出てくるvtuber",
+      channel: "セラ＝ミステリアス",
+      views: "YouTube Shorts",
+      thumb: "CG/gameplay_short03.png",
+      duration: "SHORT",
+      url: "https://youtube.com/shorts/4aG7UGzTHgo"
+    }
+  ];
 
 
+  function renderGameplayVideos() {
+    const list = document.getElementById('gameplayVideoList');
+    if (!list) return;
+
+    list.innerHTML = gameplayVideos.map(video => `
+      <a
+        href="${video.url}"
+        class="video gameplay-video"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="thumb">
+          <img
+            src="${video.thumb}"
+            alt="${video.title}"
+            loading="lazy"
+          >
+          <span class="duration">${video.duration}</span>
+        </div>
+
+        <div>
+          <div class="video-title">${video.title}</div>
+
+          <div class="video-meta">
+            ${video.channel}<br>
+            ${video.views}
+          </div>
+        </div>
+      </a>
+    `).join('');
+  }
 
 
     const callLogs = [
@@ -1657,7 +1774,10 @@ function resizeGameFrame() {
 
   window.addEventListener('resize', checkFullscreenMode);
   window.addEventListener('load', checkFullscreenMode);
+
   window.addEventListener('load', renderRandomRelatedVideos);
+  window.addEventListener('load', renderGameplayVideos);
+
   window.addEventListener('resize', resizeGameFrame);
   document.addEventListener('fullscreenchange', resizeGameFrame);
   document.addEventListener('webkitfullscreenchange', resizeGameFrame);
